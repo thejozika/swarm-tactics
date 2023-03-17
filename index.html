@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="output.css">
+    <meta charset="UTF-8">
+    <title class="">Swarm Tactics</title>
+
+</head>
+<body>
+    <div class="flex w-full h-1/6">
+                <select id="game-selector" onchange="load_game(this.options[this.selectedIndex].value)" class="block w-1/2 h-20 mx-auto justify-center" name="speed">
+    </select>
+    <select id="round-selector" onchange="load_round(this.options[this.selectedIndex].value)" class="block w-1/2 h-20 mx-auto justify-center" name="speed">
+    </select>
+</div>
+
+    <div class="flex flex-wrap h-full">
+        <div class="grow-0">
+            <canvas id="canvas" width="1080" height="720"/>
+        </div>
+        <div class="flex-col arrange-between grow justify-center min-w-[1080px] h-[720px]">
+            <div class="flex block h-1/6 w-full">
+                <button onclick="add_step(1)" class="block border-2 bg-gray-100 h-full w-1/2">1 Step</button>
+                <button onclick="add_step(-1)" class="block border-2 bg-gray-100 h-full w-1/2">-1 Step</button>
+            </div>
+            <div class="flex block h-1/6 w-full">
+                <button onclick="add_step(10)" class="block border-2 bg-gray-100 h-full w-1/2">10 Step</button>
+                <button onclick="add_step(-10)" class="block border-2 bg-gray-100 h-full w-1/2">-10 Step</button>
+            </div>
+            <div class="flex block h-1/6 w-full">
+                <button onclick="add_step(20)" class="block border-2 bg-gray-100 h-full w-1/2">20 Step</button>
+                <button onclick="add_step(-20)" class="block border-2 bg-gray-100 h-full w-1/2">-20 Step</button>
+            </div>
+            <div class="block h-2/6 w-full">
+                <select onchange="set_speed(this.options[this.selectedIndex].value)" class="block border-2 bg-gray-100 h-1/2 w-full justify-center" name="speed">
+                    <option class="text-center" value="50">slow</option>
+                    <option class="text-center" value="20">fast</option>
+                    <option class="text-center" value="10">super-fast</option>
+                </select>
+                <div class="flex w-full h-1/2 max-h-[720px]">
+                <button onclick="start()" class="block border-2 bg-gray-100 h-full w-1/2">start</button>
+                <button onclick="stop()" class="block border-2 bg-gray-100 h-full w-1/2">stop</button>
+                </div>
+            </div>
+            <div class="flex w-full h-1/6">
+                <button onclick="previous_game()" class="block border-2 bg-gray-100 h-full w-1/2">previous-round</button>
+                <button onclick="next_game()" class="block border-2 bg-gray-100 h-full w-1/2">next-round</button>
+            </div>
+        </div>
+    </div>
+    <script type="module" src="main.js"></script>
+</body>
+</html>
