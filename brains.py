@@ -1,6 +1,5 @@
 import random
 from enum import IntEnum, auto
-import nptyping
 import numpy as np
 
 
@@ -15,19 +14,22 @@ class SpawnData:
 # positive values mean neutral or friend
 # negative values mean enemy
 # The absolute amount is the distance (closer means higher)
-ViewData = nptyping.NDArray[nptyping.Shape["6"], nptyping.Float]
+# Dimensions #(6)
+ViewData = np.ndarray
 
 
 # Contains the Sensor Data starting with left behind to behind over the Front.
 # 0 Means Base, a positive value gives unit value (no Team)s
 # a negative Value means Environment, or not connected Sensor
-SensorData = nptyping.NDArray[nptyping.Shape["6,2"], nptyping.Float]
+# Dimensions #(6,2)
+SensorData = np.ndarray
 
 
 # Contains The Pheromon Data starting with left behind to behind over the Front.
 # Data is stored as Tensor with respective Dimensions R,G,B
 # 0 means no pheromones or no sensor avaiable. Is non negative.
-PheromoneData = nptyping.NDArray[nptyping.Shape["6,2,3"], nptyping.Float]
+# Dimensions #(6,2,3)
+PheromoneData = np.ndarray
 
 
 
