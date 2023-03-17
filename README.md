@@ -7,7 +7,7 @@ In the environment file you can set some environment-Variables.
 To run the game just open a console at the location and install numpy [if not already installed] <br>
 with `pip install numpy`. <br>
 Then you can just run `python main.py` <br>
-After that you can run `python -m SimpleHTTPServer 8080`, <br>
+After that you can run `python -m http.server 8080`, <br>
 then you will see the game. (after completion of main.py)
 
 you are able step through or just run it automatically.
