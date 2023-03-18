@@ -9,11 +9,11 @@ class BaseBrain(brains.BaseBrain):
     def evaluate(self, age, energy) -> (
             SpawnData, SpawnData, SpawnData, SpawnData, SpawnData, SpawnData):
         if energy >= 200:
-            return [SpawnData(data=0, brain=UnitBrain), SpawnData(data=0, brain=UnitBrain), None, None, None, SpawnData(data=0, brain=UnitBrain)]
+            return [SpawnData(data=0, brain=UnitBrain ), SpawnData(data=0, brain=UnitBrain), None, None, None, SpawnData(data=0, brain=UnitBrain)]
 
 
 class UnitBrain(brains.UnitBrain):
-    def __init__(self):
+    def __init__(self, **unit_brain_vals):
         self.movs = random.randint(10,30)
         if random.randint(0, 2) == 0:
             self.defaultDir = Movement.TL

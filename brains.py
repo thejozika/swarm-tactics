@@ -4,9 +4,9 @@ import numpy as np
 
 
 class SpawnData:
-    def __init__(self, data, brain, **kwargs):
+    def __init__(self, data, brain, **unit_brain_vals):
         self.data = data
-        self.brain = brain()
+        self.brain = brain(**unit_brain_vals)
 
 
 # Contains the Vision Sensors starting with left behind to Behind over the Front.
@@ -58,12 +58,6 @@ class Action(IntEnum):
     SCREAM_R = auto()
     SCREAM_G = auto()
     SCREAM_B = auto()
-
-
-class Input():
-    def __init__(self):
-        pass
-
 
 class UnitBrain:
     def evaluate(self, age, energy, vision:ViewData, sense:SensorData, smell:PheromoneData) \

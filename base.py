@@ -35,12 +35,12 @@ class Base(world.Entity):
     def evaluate(self, world_map, pheros, enemies, friends):
         self.ticks = self.ticks + 1
         self.energy = min(self.energy+42-3*self.get_unit_count(), 420)
-        try:
-            self.spawns = self.brain.evaluate(self.ticks, self.energy)
-            if len(self.spawns) != 6:
-                raise
-        except:
-            self.spawns = [None,None,None,None,None,None]
+        # try:
+        self.spawns = self.brain.evaluate(self.ticks, self.energy)
+        if len(self.spawns) != 6:
+            raise
+        # except:
+        #     self.spawns = [None,None,None,None,None,None]
 
     def act(self):
         if self.spawn_cooldown != 0:

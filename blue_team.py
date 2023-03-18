@@ -5,18 +5,21 @@ from brains import Movement, Action, SpawnData, ViewData, SensorData, PheromoneD
 
 
 class BaseBrain(brains.BaseBrain):
-    pass
     def evaluate(self, age, energy) -> (
             SpawnData, SpawnData, SpawnData, SpawnData, SpawnData, SpawnData):
         if energy >= 200:
-            return [SpawnData(data=0, brain=UnitBrain), SpawnData(data=0, brain=UnitBrain), None, None, None,
-                    SpawnData(data=0, brain=UnitBrain)]
+            return [SpawnData(data=0, brain=UnitBrain, movs=42), SpawnData(data=0, brain=UnitBrain, movs=7), None, None, None,
+                    SpawnData(data=0, brain=UnitBrain, movs=7)]
 
+    def round_end(self,age,energy):
+        pass
 
 class UnitBrain(brains.UnitBrain):
-    def __init__(self):
-        self.movs = random.randint(10, 30)
-        if random.randint(0, 2) == 0:
+    def __init__(self, **unit_brain_vals):
+        self.movs = unit_brain_vals.get("movs")
+        if self.movs is None:
+            self.movs = 42
+        if random.randint(0, 1) == 0:
             self.defaultDir = Movement.TL
             self.otherDir = Movement.TR
         else:
@@ -32,6 +35,7 @@ class UnitBrain(brains.UnitBrain):
         if front == -1:
             return Movement.NOP, Action.ATTACK
         if front < 0:
+            self.movs -= 1
             return Movement.MOVE, Action.EMIT_PHEROMON
         if front_left < 0:
             return Movement.TL, Action.EMIT_PHEROMON
@@ -49,12 +53,15 @@ class UnitBrain(brains.UnitBrain):
         if maxidx is not None and (maxidx == 0 or maxidx == 1):
             return Movement.TL, Action.NOP
         if maxidx is not None and maxidx == 2:
+            self.movs -= 1
             return Movement.MOVE, Action.NOP
         if maxidx is not None and (maxidx == 3 or maxidx == 4):
             return Movement.TR, Action.NOP
 
         if energy < 35:
             return Movement.NOP, Action.NOP
+        if self.movs == 0:
+            return Movement.TL,Action.REMOVE_PHEROMON
         if front == 1:
             if front_left == 1 and front_right == 1:
                 return self.defaultDir, Action.NOP
@@ -64,4 +71,5 @@ class UnitBrain(brains.UnitBrain):
                 return Movement.TR, Action.NOP
             else:
                 return Movement.TL, Action.NOP
+        self.movs -= 1
         return Movement.MOVE, Action.NOP
